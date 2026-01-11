@@ -100,6 +100,7 @@ function App() {
             hasData={hasData}
             searchQuery={searchQuery}
             allPlaces={allPlaces || []}
+            isSearching={isSearching}
           />
         </div>
       </div>

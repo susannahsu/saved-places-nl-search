@@ -72,21 +72,39 @@ export default function SearchBox({ onSearch, disabled, isSearching }: SearchBox
       </div>
       
       {!disabled && (
-        <div className="mt-2 flex flex-wrap gap-2">
-          <span className="text-xs text-gray-500">Try:</span>
-          {['cute hot spring', 'romantic dinner', 'cozy coffee shop', 'outdoor brunch'].map((example) => (
-            <button
-              key={example}
-              type="button"
-              onClick={() => {
-                setQuery(example);
-                onSearch(example);
-              }}
-              className="px-2 py-1 text-xs bg-gray-100 text-gray-700 rounded hover:bg-gray-200"
-            >
-              {example}
-            </button>
-          ))}
+        <div className="mt-2 space-y-2">
+          <div className="flex flex-wrap gap-2">
+            <span className="text-xs text-gray-500">Try:</span>
+            {['cute hot spring', 'romantic dinner', 'cozy coffee shop', 'outdoor brunch'].map((example) => (
+              <button
+                key={example}
+                type="button"
+                onClick={() => {
+                  setQuery(example);
+                  onSearch(example);
+                }}
+                className="px-2 py-1 text-xs bg-gray-100 text-gray-700 rounded hover:bg-gray-200"
+              >
+                {example}
+              </button>
+            ))}
+          </div>
+          <div className="flex flex-wrap gap-2">
+            <span className="text-xs text-gray-500">Filters:</span>
+            {['in my tokyo list', 'from favorites', 'in restaurants list'].map((example) => (
+              <button
+                key={example}
+                type="button"
+                onClick={() => {
+                  setQuery(example);
+                  onSearch(example);
+                }}
+                className="px-2 py-1 text-xs bg-blue-50 text-blue-700 rounded hover:bg-blue-100"
+              >
+                {example}
+              </button>
+            ))}
+          </div>
         </div>
       )}
     </form>

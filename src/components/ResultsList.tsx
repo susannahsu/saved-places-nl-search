@@ -1,4 +1,6 @@
-import type { Place, SearchResult } from '../types';
+import type { Place } from '../types';
+import type { SearchResult } from '../lib/embeddings/types';
+import { explainMatch, parseQuery, matchesListFilter } from '../lib/search';
 
 interface ResultsListProps {
   results: SearchResult[];
@@ -6,6 +8,7 @@ interface ResultsListProps {
   hasData: boolean;
   searchQuery: string;
   allPlaces: Place[];
+  isSearching?: boolean;
 }
 
 export default function ResultsList({ 
@@ -13,7 +16,8 @@ export default function ResultsList({
   places, 
   hasData, 
   searchQuery,
-  allPlaces 
+  allPlaces,
+  isSearching = false,
 }: ResultsListProps) {
   const handleOpenInMaps = (place: Place) => {
     let url = place.url;
@@ -61,6 +65,21 @@ export default function ResultsList({
     );
   }
 
+  // Show loading state
+  if (isSearching) {
+    return (
+      <div className="flex items-center justify-center h-full">
+        <div className="text-center">
+          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mb-4"></div>
+          <p className="text-sm text-gray-600">Searching...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Parse query for filters
+  const parsedQuery = searchQuery ? parseQuery(searchQuery) : null;
+
   // Show all places if no search query
   if (!searchQuery) {
     return (
@@ -78,8 +97,41 @@ export default function ResultsList({
     );
   }
 
+  // Apply list filter if present
+  const filteredPlaces = parsedQuery?.hasListFilter
+    ? places.filter(place => matchesListFilter(place, parsedQuery.listFilter))
+    : places;
+
   // Show search results
-  if (results.length === 0) {
+  if (filteredPlaces.length === 0 && results.length > 0) {
+    // Has results but filtered out
+    return (
+      <div className="flex items-center justify-center h-full">
+        <div className="text-center max-w-md px-4">
+          <svg
+            className="w-16 h-16 text-gray-300 mx-auto mb-4"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"
+            />
+          </svg>
+          <h3 className="text-lg font-medium text-gray-900 mb-2">No matches in "{parsedQuery?.listFilter}"</h3>
+          <p className="text-sm text-gray-500">
+            Found {results.length} results, but none in the "{parsedQuery?.listFilter}" list.
+            Try searching without the list filter.
+          </p>
+        </div>
+      </div>
+    );
+  }
+
+  if (filteredPlaces.length === 0) {
     return (
       <div className="flex items-center justify-center h-full">
         <div className="text-center max-w-md px-4">
@@ -110,11 +162,16 @@ export default function ResultsList({
       <div className="mb-4">
         <h2 className="text-lg font-semibold text-gray-900">Search Results</h2>
         <p className="text-sm text-gray-500">
-          Found {results.length} {results.length === 1 ? 'place' : 'places'} matching "{searchQuery}"
+          Found {filteredPlaces.length} {filteredPlaces.length === 1 ? 'place' : 'places'} matching "{searchQuery}"
+          {parsedQuery?.hasListFilter && (
+            <span className="ml-1">
+              in <span className="font-medium">"{parsedQuery.listFilter}"</span>
+            </span>
+          )}
         </p>
       </div>
       <div className="space-y-3">
-        {places.map((place, index) => {
+        {filteredPlaces.map((place, index) => {
           const result = results.find(r => r.placeId === place.id);
           return (
             <PlaceCard 
@@ -123,6 +180,7 @@ export default function ResultsList({
               onOpen={handleOpenInMaps}
               score={result?.score}
               rank={result?.rank}
+              searchQuery={parsedQuery?.searchTerms || searchQuery}
             />
           );
         })}
@@ -136,9 +194,14 @@ interface PlaceCardProps {
   onOpen: (place: Place) => void;
   score?: number;
   rank?: number;
+  searchQuery?: string;
 }
 
-function PlaceCard({ place, onOpen, score, rank }: PlaceCardProps) {
+function PlaceCard({ place, onOpen, score, rank, searchQuery }: PlaceCardProps) {
+  // Generate match explanation if searching
+  const explanations = searchQuery 
+    ? explainMatch(place, searchQuery, 2)
+    : [];
   return (
     <div className="bg-white border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
       <div className="flex items-start justify-between">
@@ -160,6 +223,17 @@ function PlaceCard({ place, onOpen, score, rank }: PlaceCardProps) {
           
           {place.notes && (
             <p className="text-sm text-gray-700 mb-2 italic">"{place.notes}"</p>
+          )}
+          
+          {/* Match Explanation */}
+          {explanations.length > 0 && (
+            <div className="mb-2 space-y-1">
+              {explanations.map((exp, i) => (
+                <div key={i} className="text-xs text-blue-700 bg-blue-50 px-2 py-1 rounded inline-block mr-2">
+                  <span className="font-medium">{exp.label}:</span> {exp.snippet}
+                </div>
+              ))}
+            </div>
           )}
           
           <div className="flex items-center gap-3 text-xs text-gray-500">
