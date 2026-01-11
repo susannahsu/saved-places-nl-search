@@ -1,0 +1,130 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          0,
+          0
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2025-05-14T23:44:16Z",
+        "google_maps_url": "http://maps.google.com/?q=128+W+9th+St,+Boston,+MA+02127&ftid=0x89e37a60de24a05b:0x458f7c97091ecbb2",
+        "Comment": "No location information is available for this saved place"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -71.1194195,
+          42.3334213
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2025-02-16T01:17:13Z",
+        "google_maps_url": "http://maps.google.com/?cid=173672639019554067",
+        "location": {
+          "address": "295 Washington St, Brookline, MA 02445, United States",
+          "country_code": "US",
+          "name": "Blossom Bar at Sichuan Garden"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -71.0789695,
+          42.3916011
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2025-01-19T17:48:46Z",
+        "google_maps_url": "http://maps.google.com/?cid=13675997499555072333",
+        "location": {
+          "address": "381 Revolution Dr, Somerville, MA 02145, United States",
+          "country_code": "US",
+          "name": "TITLE Boxing Club Boston Assembly Row"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -71.1217410,
+          42.3954502
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2024-11-03T17:36:36Z",
+        "google_maps_url": "http://maps.google.com/?cid=2443784669319877458",
+        "location": {
+          "address": "247 Elm St, Somerville, MA 02144, United States",
+          "country_code": "US",
+          "name": "The Burren"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          0,
+          0
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2024-07-27T16:41:52Z",
+        "google_maps_url": "http://maps.google.com/?q=48.186833299999996,16.3130556",
+        "Comment": "No location information is available for this saved place"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          16.4155792,
+          48.1888881
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2024-07-26T15:54:06Z",
+        "google_maps_url": "http://maps.google.com/?cid=12351309458613374887",
+        "location": {
+          "address": "Franzosengraben 3, 1030 Wien, Austria",
+          "country_code": "AT",
+          "name": "MARX beer and more"
+        }
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -61.0524646,
+          13.8599527
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2024-03-10T12:49:23Z",
+        "google_maps_url": "http://maps.google.com/?cid=7425758871892402760",
+        "location": {
+          "address": "New Development, St. Lucia",
+          "country_code": "LC",
+          "name": "Sapphire Villas"
+        }
+      },
+      "type": "Feature"
+    }
+  ]
+}

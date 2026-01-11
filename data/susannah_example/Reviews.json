@@ -1,0 +1,47 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [
+          -61.0524646,
+          13.8599527
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2024-03-25T23:33:04.639142Z",
+        "five_star_rating_published": 5,
+        "google_maps_url": "https://www.google.com/maps/place//data=!4m2!3m1!1s0x0:0x670d9859c2da2248",
+        "location": {
+          "address": "New Development, St. Lucia",
+          "country_code": "LC",
+          "name": "Sapphire Villas"
+        },
+        "review_text_published": "This place is outstanding! With its breathtaking views and impeccably clean, spacious interiors, it provides an unparalleled experience. What really sets this location apart, though, is our host, Janus. He has an exceptional talent for making his guests feel at home, quickly becoming more of a friend than a host during our stay. Janus is not only hospitable but also incredibly engaging and inspirational. Spending time with him, listening to his life stories and current projects, was a highlight in itself. He even gave us a sneak peek at his upcoming developments, where we could visibly see his dedication and innovative approach.\n\nFor anyone visiting Saint Lucia, seeking a memorable and authentic experience, connecting with Janus is a must."
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [
+          -71.1245713,
+          42.3517716
+        ],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2023-01-21T21:18:19.970888Z",
+        "five_star_rating_published": 5,
+        "google_maps_url": "https://www.google.com/maps/place//data=!4m2!3m1!1s0x0:0xa768d5577b4f9da0",
+        "location": {
+          "address": "1104 Commonwealth Ave, Boston, MA 02215, United States",
+          "country_code": "US",
+          "name": "Sky Salon"
+        },
+        "review_text_published": "I had so much fun just dying my hair here! Sky is really good at picking a color that fits me super well. Zoe was super careful and detail-oriented. Imagine the experience is just like you and your friends are dying your hair together! This says a lot about how friendly and caring they are even though this was my first time here! Would highly recommend Sky Salon!"
+      },
+      "type": "Feature"
+    }
+  ]
+}
