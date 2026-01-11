@@ -39,22 +39,6 @@ export interface PlaceMetadata {
   rawData?: Record<string, unknown>;
 }
 
-export interface PlaceEmbedding {
-  placeId: string;
-  embedding: Float32Array;
-  embeddingVersion: string;
-  textUsed: string;
-  createdAt: Date;
-}
-
-export interface SearchResult {
-  placeId: string;
-  score: number;
-  rank: number;
-  clicked?: boolean;
-  clickedAt?: Date;
-}
-
 // ============================================================================
 // Application State
 // ============================================================================

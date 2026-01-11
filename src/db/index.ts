@@ -1,5 +1,6 @@
 import Dexie, { Table } from 'dexie';
-import type { Place, PlaceEmbedding, AppConfig } from '../types';
+import type { Place, AppConfig } from '../types';
+import type { PlaceEmbedding } from '../lib/embeddings/types';
 
 // ============================================================================
 // Database Schema
