@@ -6,25 +6,27 @@ import type { PlaceRecord } from '../parsers/types';
 
 /**
  * Build embedding text from place record
- * Concatenates: name + notes + list name
+ * Prioritizes notes/descriptions for better semantic search
+ * Order: notes (most important) → name → list → address
  */
 export function buildEmbeddingText(place: PlaceRecord): string {
   const parts: string[] = [];
   
-  // Add name (required)
-  parts.push(place.name);
-  
-  // Add notes if present
+  // Priority 1: Notes/descriptions (most important for semantic search)
+  // This is where users describe what the place is like
   if (place.notes) {
     parts.push(place.notes);
   }
   
-  // Add list name if present
+  // Priority 2: Name (helps identify the place)
+  parts.push(place.name);
+  
+  // Priority 3: List name (provides context)
   if (place.listName) {
-    parts.push(place.listName);
+    parts.push(`List: ${place.listName}`);
   }
   
-  // Add address if present (helps with location-based queries)
+  // Priority 4: Address (helps with location-based queries)
   if (place.address) {
     parts.push(place.address);
   }

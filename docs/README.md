@@ -12,6 +12,13 @@ This folder contains detailed documentation for the SavedPlaces NL Search projec
   - Metrics and success criteria
   - Portfolio project vs real product comparison
 
+- **[PRODUCTION_CONSIDERATIONS.md](PRODUCTION_CONSIDERATIONS.md)** - Production vs Portfolio
+  - What would change in production
+  - Google Places API integration approach
+  - Cost/benefit analysis
+  - Scalability considerations
+  - Interview talking points
+
 ### Technical
 - **[ARCHITECTURE.md](ARCHITECTURE.md)** - Technical Architecture
   - System design and components
