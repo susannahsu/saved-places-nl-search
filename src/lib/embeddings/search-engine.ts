@@ -3,7 +3,7 @@
  * Manages embeddings and performs similarity search
  */
 
-import { db } from '../db';
+import { db } from '../../db';
 import type { PlaceRecord } from '../parsers/types';
 import type {
   EmbeddingProvider,
@@ -120,7 +120,7 @@ export class SearchEngine {
     }
     
     // Compute similarities
-    const results: SearchResult[] = allEmbeddings.map((emb) => ({
+    const results: SearchResult[] = allEmbeddings.map((emb: PlaceEmbedding) => ({
       placeId: emb.placeId,
       score: cosineSimilarity(queryEmbedding.values, emb.embedding),
       rank: 0, // Will be set after sorting

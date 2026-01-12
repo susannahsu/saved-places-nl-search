@@ -2,8 +2,6 @@
  * Explain why a place matched the search query
  */
 
-import type { PlaceRecord } from '../parsers/types';
-
 export interface MatchExplanation {
   field: 'name' | 'notes' | 'listName' | 'address';
   label: string;
@@ -11,12 +9,20 @@ export interface MatchExplanation {
   relevance: number;
 }
 
+// Type that matches both Place and PlaceRecord
+type PlaceLike = {
+  name: string;
+  notes?: string;
+  listName?: string;
+  address?: string;
+};
+
 /**
  * Generate explanation for why a place matched
  * Returns top 1-2 most relevant fields
  */
 export function explainMatch(
-  place: PlaceRecord,
+  place: PlaceLike,
   query: string,
   maxExplanations: number = 2
 ): MatchExplanation[] {

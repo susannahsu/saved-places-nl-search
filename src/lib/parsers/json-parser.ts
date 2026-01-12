@@ -44,7 +44,7 @@ export class JSONParser implements FileParser {
   /**
    * Parse GeoJSON content into PlaceRecord[]
    */
-  async parse(content: string, filename: string): Promise<ParseResult> {
+  async parse(content: string, _filename: string): Promise<ParseResult> {
     const startTime = performance.now();
     const places: PlaceRecord[] = [];
     const errors: ParseError[] = [];

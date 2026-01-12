@@ -1,0 +1,447 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "geometry": {
+        "coordinates": [-71.1194195, 42.3334213],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2025-02-16T01:17:13Z",
+        "google_maps_url": "http://maps.google.com/?cid=173672639019554067",
+        "location": {
+          "address": "295 Washington St, Brookline, MA 02445, United States",
+          "country_code": "US",
+          "name": "Blossom Bar at Sichuan Garden"
+        },
+        "Comment": "Amazing Sichuan food, spicy dan dan noodles are incredible"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [-71.0789695, 42.3916011],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2025-01-19T17:48:46Z",
+        "google_maps_url": "http://maps.google.com/?cid=13675997499555072333",
+        "location": {
+          "address": "381 Revolution Dr, Somerville, MA 02145, United States",
+          "country_code": "US",
+          "name": "TITLE Boxing Club Boston Assembly Row"
+        },
+        "Comment": "Great boxing gym, intense workouts"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [-71.1217410, 42.3954502],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2024-11-03T17:36:36Z",
+        "google_maps_url": "http://maps.google.com/?cid=2443784669319877458",
+        "location": {
+          "address": "247 Elm St, Somerville, MA 02144, United States",
+          "country_code": "US",
+          "name": "The Burren"
+        },
+        "Comment": "Irish pub with live music, cozy atmosphere"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [16.4155792, 48.1888881],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2024-07-26T15:54:06Z",
+        "google_maps_url": "http://maps.google.com/?cid=12351309458613374887",
+        "location": {
+          "address": "Franzosengraben 3, 1030 Wien, Austria",
+          "country_code": "AT",
+          "name": "MARX beer and more"
+        },
+        "Comment": "Craft beer bar in Vienna, great selection"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [-61.0524646, 13.8599527],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2024-03-10T12:49:23Z",
+        "google_maps_url": "http://maps.google.com/?cid=7425758871892402760",
+        "location": {
+          "address": "New Development, St. Lucia",
+          "country_code": "LC",
+          "name": "Sapphire Villas"
+        },
+        "Comment": "Beautiful beachfront villas, perfect for honeymoon"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [-71.0589, 42.3601],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2024-12-15T10:30:00Z",
+        "google_maps_url": "http://maps.google.com/?cid=1234567890123456789",
+        "location": {
+          "address": "1 Charles St, Boston, MA 02114, United States",
+          "country_code": "US",
+          "name": "Tatte Bakery & Cafe"
+        },
+        "Comment": "Best shakshuka in Boston, great for brunch with friends"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [-71.0636, 42.3555],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2024-11-20T14:00:00Z",
+        "google_maps_url": "http://maps.google.com/?cid=2234567890123456789",
+        "location": {
+          "address": "75 Arlington St, Boston, MA 02116, United States",
+          "country_code": "US",
+          "name": "Boston Public Garden"
+        },
+        "Comment": "Beautiful park, perfect for morning walks and swan boats"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [-71.0942, 42.3398],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2024-10-05T18:30:00Z",
+        "google_maps_url": "http://maps.google.com/?cid=3234567890123456789",
+        "location": {
+          "address": "3 Brookline Pl, Brookline, MA 02445, United States",
+          "country_code": "US",
+          "name": "Brookline Booksmith"
+        },
+        "Comment": "Independent bookstore, great selection and cozy reading nooks"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [-71.0703, 42.3467],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2024-09-12T12:00:00Z",
+        "google_maps_url": "http://maps.google.com/?cid=4234567890123456789",
+        "location": {
+          "address": "704 Massachusetts Ave, Cambridge, MA 02139, United States",
+          "country_code": "US",
+          "name": "Flour Bakery + Cafe"
+        },
+        "Comment": "Amazing sticky buns, perfect spot for working on laptop"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [-71.1190, 42.3736],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2024-08-22T16:45:00Z",
+        "google_maps_url": "http://maps.google.com/?cid=5234567890123456789",
+        "location": {
+          "address": "1 Harvard Square, Cambridge, MA 02138, United States",
+          "country_code": "US",
+          "name": "Harvard Square"
+        },
+        "Comment": "Historic square, great for people watching and street performers"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [-71.0995, 42.3478],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2024-07-18T19:30:00Z",
+        "google_maps_url": "http://maps.google.com/?cid=6234567890123456789",
+        "location": {
+          "address": "1682 Massachusetts Ave, Cambridge, MA 02138, United States",
+          "country_code": "US",
+          "name": "Alden & Harlow"
+        },
+        "Comment": "Creative American cuisine, amazing burger and cocktails"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [-71.0567, 42.3605],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2024-06-30T11:00:00Z",
+        "google_maps_url": "http://maps.google.com/?cid=7234567890123456789",
+        "location": {
+          "address": "1 Faneuil Hall Sq, Boston, MA 02109, United States",
+          "country_code": "US",
+          "name": "Faneuil Hall Marketplace"
+        },
+        "Comment": "Tourist spot but fun for visitors, lots of food options"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [-71.0588, 42.3482],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2024-05-15T20:00:00Z",
+        "google_maps_url": "http://maps.google.com/?cid=8234567890123456789",
+        "location": {
+          "address": "406 Washington St, Somerville, MA 02143, United States",
+          "country_code": "US",
+          "name": "Spoke Wine Bar"
+        },
+        "Comment": "Intimate wine bar, excellent natural wine selection, romantic"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [-71.1067, 42.3736],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2024-04-20T13:30:00Z",
+        "google_maps_url": "http://maps.google.com/?cid=9234567890123456789",
+        "location": {
+          "address": "1 Bennett St, Cambridge, MA 02138, United States",
+          "country_code": "US",
+          "name": "Grendel's Den"
+        },
+        "Comment": "Casual pub near Harvard, half-price food with drink purchase"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [-71.0903, 42.3398],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2024-03-08T15:00:00Z",
+        "google_maps_url": "http://maps.google.com/?cid=1034567890123456789",
+        "location": {
+          "address": "318 Harvard St, Brookline, MA 02446, United States",
+          "country_code": "US",
+          "name": "Coolidge Corner Theatre"
+        },
+        "Comment": "Independent cinema, great for art house films and classics"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [139.7671, 35.6812],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2023-11-10T08:00:00Z",
+        "google_maps_url": "http://maps.google.com/?cid=1134567890123456789",
+        "location": {
+          "address": "4 Chome-2-8 Shibakoen, Minato City, Tokyo 105-0011, Japan",
+          "country_code": "JP",
+          "name": "Tokyo Tower"
+        },
+        "Comment": "Iconic landmark, beautiful views especially at sunset"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [139.6917, 35.6895],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2023-11-09T12:30:00Z",
+        "google_maps_url": "http://maps.google.com/?cid=1234567890123456790",
+        "location": {
+          "address": "2 Chome-3-1 Dogenzaka, Shibuya City, Tokyo 150-0043, Japan",
+          "country_code": "JP",
+          "name": "Shibuya Crossing"
+        },
+        "Comment": "Busiest intersection in the world, amazing to experience"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [139.7005, 35.6586],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2023-11-08T19:00:00Z",
+        "google_maps_url": "http://maps.google.com/?cid=1234567890123456791",
+        "location": {
+          "address": "5 Chome-24-2 Jingumae, Shibuya City, Tokyo 150-0001, Japan",
+          "country_code": "JP",
+          "name": "Afuri Ramen"
+        },
+        "Comment": "Light yuzu ramen, refreshing and delicious, not too heavy"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [139.7673, 35.7148],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2023-11-07T10:00:00Z",
+        "google_maps_url": "http://maps.google.com/?cid=1234567890123456792",
+        "location": {
+          "address": "1 Chome-1-2 Oshiage, Sumida City, Tokyo 131-0045, Japan",
+          "country_code": "JP",
+          "name": "Tokyo Skytree"
+        },
+        "Comment": "Tallest structure in Japan, incredible 360 views of Tokyo"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [139.7024, 35.6764],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2023-11-06T14:30:00Z",
+        "google_maps_url": "http://maps.google.com/?cid=1234567890123456793",
+        "location": {
+          "address": "1 Chome-1-2 Yoyogi Kamizonocho, Shibuya City, Tokyo 151-8557, Japan",
+          "country_code": "JP",
+          "name": "Meiji Shrine"
+        },
+        "Comment": "Peaceful shrine in the middle of Tokyo, beautiful forest walk"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [2.3522, 48.8566],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2023-06-15T16:00:00Z",
+        "google_maps_url": "http://maps.google.com/?cid=1234567890123456794",
+        "location": {
+          "address": "Champ de Mars, 5 Avenue Anatole France, 75007 Paris, France",
+          "country_code": "FR",
+          "name": "Eiffel Tower"
+        },
+        "Comment": "Classic Paris landmark, go at night for the light show"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [2.3364, 48.8606],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2023-06-14T11:00:00Z",
+        "google_maps_url": "http://maps.google.com/?cid=1234567890123456795",
+        "location": {
+          "address": "Rue de Rivoli, 75001 Paris, France",
+          "country_code": "FR",
+          "name": "Louvre Museum"
+        },
+        "Comment": "World-class art museum, spend a full day here, Mona Lisa is tiny"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [2.3212, 48.8529],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2023-06-13T09:30:00Z",
+        "google_maps_url": "http://maps.google.com/?cid=1234567890123456796",
+        "location": {
+          "address": "28 Rue des Quatre Vents, 75006 Paris, France",
+          "country_code": "FR",
+          "name": "Café de Flore"
+        },
+        "Comment": "Historic cafe, great for people watching and croissants"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [-71.0589, 42.3584],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2024-12-01T08:00:00Z",
+        "google_maps_url": "http://maps.google.com/?cid=1234567890123456797",
+        "location": {
+          "address": "83 Mt Vernon St, Boston, MA 02108, United States",
+          "country_code": "US",
+          "name": "Panificio"
+        },
+        "Comment": "Tiny Italian bakery on Beacon Hill, best focaccia sandwiches"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [-71.0719, 42.3555],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2024-11-15T17:00:00Z",
+        "google_maps_url": "http://maps.google.com/?cid=1234567890123456798",
+        "location": {
+          "address": "253 Shawmut Ave, Boston, MA 02118, United States",
+          "country_code": "US",
+          "name": "Myers + Chang"
+        },
+        "Comment": "Asian fusion, creative cocktails, fun atmosphere for groups"
+      },
+      "type": "Feature"
+    },
+    {
+      "geometry": {
+        "coordinates": [-71.0603, 42.3601],
+        "type": "Point"
+      },
+      "properties": {
+        "date": "2024-10-28T13:00:00Z",
+        "google_maps_url": "http://maps.google.com/?cid=1234567890123456799",
+        "location": {
+          "address": "52 Hanover St, Boston, MA 02109, United States",
+          "country_code": "US",
+          "name": "Mike's Pastry"
+        },
+        "Comment": "Famous North End bakery, cannolis are a must-try, always crowded"
+      },
+      "type": "Feature"
+    }
+  ]
+}

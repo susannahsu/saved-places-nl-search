@@ -1,6 +1,7 @@
 import type { Place } from '../types';
 import type { SearchResult } from '../lib/embeddings/types';
 import { explainMatch, parseQuery, matchesListFilter } from '../lib/search';
+import { extensionBridge } from '../lib/extension/bridge';
 
 interface ResultsListProps {
   results: SearchResult[];
@@ -19,23 +20,32 @@ export default function ResultsList({
   allPlaces,
   isSearching = false,
 }: ResultsListProps) {
-  const handleOpenInMaps = (place: Place) => {
-    let url = place.url;
+  const handleOpenInMaps = async (place: Place) => {
+    let url: string;
     
-    if (!url) {
-      // Fallback: construct URL from coordinates or address
-      if (place.coordinates) {
-        const { lat, lng } = place.coordinates;
-        url = `https://www.google.com/maps/search/?api=1&query=${lat},${lng}`;
-      } else if (place.address) {
-        const query = `${place.name}, ${place.address}`;
-        url = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
-      } else {
-        url = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(place.name)}`;
-      }
+    // Priority 1: Search by name + address (opens the actual place page)
+    if (place.name && place.address) {
+      const query = `${place.name}, ${place.address}`;
+      url = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
+    }
+    // Priority 2: Use the Takeout URL (CID-based, should open place page)
+    else if (place.url) {
+      url = place.url.replace('http://', 'https://');
+    }
+    // Priority 3: Use coordinates (shows pin but not place page)
+    else if (place.coordinates) {
+      const { lat, lng } = place.coordinates;
+      url = `https://www.google.com/maps/search/?api=1&query=${lat},${lng}`;
+    }
+    // Priority 4: Search by name only
+    else {
+      url = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(place.name)}`;
     }
     
-    window.open(url, '_blank');
+    console.log('Opening Maps URL:', url, 'for place:', place.name);
+    
+    // Use extension bridge to open URL (handles both extension and web contexts)
+    await extensionBridge.openMapsUrl(url);
   };
 
   // Show empty state if no data
@@ -171,7 +181,7 @@ export default function ResultsList({
         </p>
       </div>
       <div className="space-y-3">
-        {filteredPlaces.map((place, index) => {
+        {filteredPlaces.map((place) => {
           const result = results.find(r => r.placeId === place.id);
           return (
             <PlaceCard 

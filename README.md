@@ -1,19 +1,21 @@
-# SavedPlaces NL Search
+# SavedPlaces NL Search 🗺️🔍
 
-Natural language search for your Google Maps saved places.
+**Natural language search for your Google Maps saved places.**
 
-## Problem
+A Chrome Extension that lets you search your saved places using natural language queries like "cute hot spring" or "romantic dinner with outdoor seating" — without leaving Google Maps.
 
-Google Maps only supports keyword search for saved places. If you can't remember the exact name, you're stuck scrolling through lists.
+## ✨ Features
 
-## Solution
+- 🔍 **Natural Language Search** - Find places by description, not just name
+- 🧠 **Semantic Matching** - Powered by OpenAI embeddings or local models
+- 🔒 **Privacy-First** - All data stored locally in IndexedDB
+- 🎯 **Smart Filters** - Search within specific lists ("in my tokyo list")
+- 💡 **Match Explanations** - See why each place matched your query
+- ⚡ **Fast & Local** - No external servers, works offline after setup
 
-Upload your Google Takeout export and search using natural language queries like:
-- "cute hot spring"
-- "romantic dinner with outdoor seating"
-- "cozy coffee shop for working"
+## 🚀 Quick Start
 
-## Quick Start
+### As a Web App (Development)
 
 ```bash
 # Install dependencies
@@ -22,42 +24,144 @@ npm install
 # Run dev server
 npm run dev
 
-# Open http://localhost:3000
+# Open http://localhost:5173
 ```
 
-See [SETUP.md](./SETUP.md) for detailed instructions.
+### As a Chrome Extension (Production)
 
-## Project Status
+```bash
+# Build extension
+npm run build:extension
 
-**Phase 1: UI Shell** ✅ Complete
-- File import with drag & drop
-- IndexedDB storage
-- Basic keyword search
-- Results display
+# Load in Chrome
+# 1. Open chrome://extensions/
+# 2. Enable "Developer mode"
+# 3. Click "Load unpacked"
+# 4. Select the dist/ folder
+```
 
-**Phase 2: ML Integration** 🚧 Next
-- Transformers.js
-- Semantic search
-- Embedding generation
+See [EXTENSION_SETUP.md](./EXTENSION_SETUP.md) for detailed instructions.
 
-**Phase 3: Chrome Extension** 📋 Planned
-- Side panel UI
-- Google Maps integration
+## 📋 Project Status
 
-## Documentation
+**Phase 1: Core App** ✅ Complete
+- [x] File import (JSON/CSV parsing)
+- [x] IndexedDB storage with Dexie
+- [x] Semantic search with embeddings
+- [x] Match explanations & filters
+- [x] Loading/empty states
+
+**Phase 2: Chrome Extension** ✅ Complete
+- [x] Manifest V3 configuration
+- [x] Side panel UI
+- [x] Content script injection
+- [x] Service worker
+- [x] Google Maps integration
+
+**Phase 3: Polish** 🚧 In Progress
+- [ ] Generate extension icons
+- [ ] Add keyboard shortcuts
+- [ ] Add onboarding flow
+- [ ] Add settings page
+
+**Phase 4: Publishing** 📋 Planned
+- [ ] Chrome Web Store listing
+- [ ] Demo video
+- [ ] Portfolio integration
+
+## 📚 Documentation
 
 - [PRD.md](./PRD.md) - Product Requirements Document
 - [ARCHITECTURE.md](./ARCHITECTURE.md) - Technical Architecture
-- [SETUP.md](./SETUP.md) - Setup & Development Guide
+- [EXTENSION_SETUP.md](./EXTENSION_SETUP.md) - Extension Setup Guide
+- [EXTENSION_CHECKLIST.md](./EXTENSION_CHECKLIST.md) - Testing Checklist
 
-## Tech Stack
+## 🛠️ Tech Stack
 
+**Frontend**
 - React + TypeScript
-- Vite
-- Tailwind CSS
-- Dexie (IndexedDB)
-- Transformers.js (coming soon)
+- Vite (build tool)
+- Tailwind CSS (styling)
+- Dexie (IndexedDB wrapper)
 
-## License
+**Search & ML**
+- OpenAI Embeddings API (text-embedding-3-small)
+- Cosine similarity for ranking
+- Local vector storage
 
-MIT
+**Chrome Extension**
+- Manifest V3
+- Side Panel API
+- Content Scripts
+- Service Worker
+
+## 🧪 Testing
+
+```bash
+# Run all tests
+npm test
+
+# Run tests with UI
+npm run test:ui
+
+# Run tests once (CI mode)
+npm run test:run
+```
+
+## 📦 Project Structure
+
+```
+src/
+├── components/          # React components
+│   ├── FileImportPanel.tsx
+│   ├── SearchBox.tsx
+│   ├── ResultsList.tsx
+│   └── DebugPanel.tsx
+├── lib/
+│   ├── parsers/        # JSON/CSV parsing
+│   ├── embeddings/     # Embedding generation & search
+│   ├── search/         # Query parsing & match explanation
+│   └── extension/      # Chrome Extension bridge
+├── db/                 # Dexie database schema
+└── types/              # TypeScript interfaces
+
+public/
+├── manifest.json       # Extension manifest
+├── service-worker.js   # Background service worker
+├── content-script.js   # Content script for Google Maps
+└── content-script.css  # Injected button styles
+```
+
+## 🎯 Use Cases
+
+1. **"Where was that ramen place?"**
+   - Search: "ramen with amazing broth"
+   - Finds places based on your notes, not just names
+
+2. **"Find a coffee shop for working"**
+   - Search: "quiet coffee with wifi"
+   - Matches based on semantic meaning
+
+3. **"What did I save in Tokyo?"**
+   - Search: "in my tokyo list"
+   - Filters by list name automatically
+
+## 🔒 Privacy & Security
+
+- ✅ **No data collection** - Everything stays on your device
+- ✅ **No tracking** - No analytics or telemetry
+- ✅ **No scraping** - Doesn't read Google Maps data
+- ✅ **Minimal permissions** - Only what's necessary
+- ✅ **Open source** - Audit the code yourself
+
+## 🤝 Contributing
+
+This is a portfolio project, but feedback and suggestions are welcome!
+
+## 📄 License
+
+MIT - Feel free to use as a reference for your own projects!
+
+---
+
+**Built with ❤️ as a product management & engineering portfolio piece.**

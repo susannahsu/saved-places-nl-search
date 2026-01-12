@@ -19,7 +19,7 @@ export class ParserDetector {
   /**
    * Detect the appropriate parser for the given content
    */
-  detectParser(content: string, filename?: string): FileParser | null {
+  detectParser(content: string, _filename?: string): FileParser | null {
     // Try each parser's canParse method
     for (const parser of this.parsers) {
       if (parser.canParse(content)) {

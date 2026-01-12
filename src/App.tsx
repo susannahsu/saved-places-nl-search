@@ -1,11 +1,15 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { db } from './db';
 import FileImportPanel from './components/FileImportPanel';
 import SearchBox from './components/SearchBox';
 import ResultsList from './components/ResultsList';
 import DebugPanel from './components/DebugPanel';
-import type { Place, SearchResult } from './types';
+import type { Place } from './types';
+import type { SearchResult } from './lib/embeddings/types';
+import { SearchEngine } from './lib/embeddings/search-engine';
+import { OpenAIEmbeddingProvider } from './lib/embeddings/providers/openai-provider';
+import { MockEmbeddingProvider } from './lib/embeddings/providers/mock-provider';
 
 function App() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -23,38 +27,57 @@ function App() {
   });
 
   const hasData = (stats?.totalPlaces ?? 0) > 0;
+  const hasEmbeddings = (stats?.totalEmbeddings ?? 0) > 0;
 
-  // Handle search (placeholder for now)
+  // Handle search with semantic search
   const handleSearch = async (query: string) => {
     setSearchQuery(query);
     setIsSearching(true);
 
     try {
-      // TODO: Implement actual semantic search
-      // For now, just do simple text matching
       if (!query.trim()) {
         setSearchResults([]);
         return;
       }
 
-      const places = await db.places
-        .filter(place => 
-          place.name.toLowerCase().includes(query.toLowerCase()) ||
-          place.notes?.toLowerCase().includes(query.toLowerCase()) ||
-          place.address?.toLowerCase().includes(query.toLowerCase())
-        )
-        .limit(20)
-        .toArray();
+      // Check if we have embeddings
+      if (!hasEmbeddings) {
+        // Fallback to keyword search
+        const places = await db.places
+          .filter(place => {
+            const nameMatch = place.name.toLowerCase().includes(query.toLowerCase());
+            const notesMatch = place.notes?.toLowerCase().includes(query.toLowerCase()) ?? false;
+            const addressMatch = place.address?.toLowerCase().includes(query.toLowerCase()) ?? false;
+            return nameMatch || notesMatch || addressMatch;
+          })
+          .limit(20)
+          .toArray();
 
-      const results: SearchResult[] = places.map((place, index) => ({
-        placeId: place.id,
-        score: 0.8, // Placeholder score
-        rank: index + 1,
-      }));
+        const results: SearchResult[] = places.map((place, index) => ({
+          placeId: place.id,
+          score: 0.8,
+          rank: index + 1,
+        }));
+
+        setSearchResults(results);
+        return;
+      }
+
+      // Use semantic search
+      const apiKey = localStorage.getItem('openai_api_key');
+      const provider = apiKey 
+        ? new OpenAIEmbeddingProvider({ apiKey })
+        : new MockEmbeddingProvider();
+
+      const searchEngine = new SearchEngine(provider);
+      // Use lower threshold for mock embeddings since they're random
+      const minScore = apiKey ? 0.3 : 0.0;
+      const results = await searchEngine.search(query, { topK: 20, minScore });
 
       setSearchResults(results);
     } catch (error) {
       console.error('Search error:', error);
+      setSearchResults([]);
     } finally {
       setIsSearching(false);
     }

@@ -1,6 +1,12 @@
 import { useState, useCallback } from 'react';
 import { db } from '../db';
 import type { Place, PlaceCategory } from '../types';
+import { SearchEngine } from '../lib/embeddings/search-engine';
+import { OpenAIEmbeddingProvider } from '../lib/embeddings/providers/openai-provider';
+import { MockEmbeddingProvider } from '../lib/embeddings/providers/mock-provider';
+import type { PlaceRecord } from '../lib/parsers/types';
+import EmbeddingProgress from './EmbeddingProgress';
+import type { BuildIndexProgress } from '../lib/embeddings/types';
 
 export default function FileImportPanel() {
   const [isDragging, setIsDragging] = useState(false);
@@ -9,6 +15,7 @@ export default function FileImportPanel() {
     type: 'success' | 'error' | 'info';
     message: string;
   } | null>(null);
+  const [embeddingProgress, setEmbeddingProgress] = useState<BuildIndexProgress | null>(null);
 
   const handleDragOver = useCallback((e: React.DragEvent) => {
     e.preventDefault();
@@ -70,15 +77,29 @@ export default function FileImportPanel() {
             const props = feature.properties || {};
             const coords = feature.geometry?.coordinates;
 
+            // Extract name from various possible locations
+            const name = props.location?.name || 
+                        props.name || 
+                        props.Location?.['Business Name'] || 
+                        `Place ${index + 1}`;
+            
+            // Extract address from various possible locations
+            const address = props.location?.address || 
+                           props.address || 
+                           props.Location?.Address;
+            
+            // Extract URL (handle both lowercase and capitalized versions)
+            const url = props.google_maps_url || props['Google Maps URL'];
+            
             return {
               id: crypto.randomUUID(),
-              name: props.name || props.Location?.['Business Name'] || `Place ${index + 1}`,
-              address: props.address || props.Location?.Address,
+              name,
+              address,
               coordinates: coords ? { lng: coords[0], lat: coords[1] } : undefined,
               notes: props.Comment,
               listName: undefined,
               category: 'other' as PlaceCategory,
-              url: props['Google Maps URL'],
+              url,
               placeId: undefined,
               metadata: {
                 source: 'takeout_json' as const,
@@ -86,7 +107,7 @@ export default function FileImportPanel() {
                 importVersion: '0.1.0',
                 rawData: props,
               },
-              createdAt: props.Published ? new Date(props.Published) : new Date(),
+              createdAt: props.date ? new Date(props.date) : new Date(),
               importedAt: new Date(),
             };
           } catch (error) {
@@ -94,7 +115,7 @@ export default function FileImportPanel() {
             return null;
           }
         })
-        .filter((p): p is Place => p !== null);
+        .filter((p: Place | null): p is Place => p !== null);
 
       if (places.length === 0) {
         throw new Error('No valid places found in file');
@@ -109,8 +130,11 @@ export default function FileImportPanel() {
 
       setImportStatus({
         type: 'success',
-        message: `Successfully imported ${places.length} places!`,
+        message: `Successfully imported ${places.length} places! Generating embeddings...`,
       });
+
+      // Generate embeddings
+      await generateEmbeddings(places);
     } catch (error) {
       console.error('Import error:', error);
       setImportStatus({
@@ -119,6 +143,64 @@ export default function FileImportPanel() {
       });
     } finally {
       setIsImporting(false);
+    }
+  };
+
+  const generateEmbeddings = async (places: Place[]) => {
+    try {
+      // Convert Place to PlaceRecord format
+      const placeRecords: PlaceRecord[] = places.map(place => ({
+        id: place.id,
+        name: place.name,
+        listName: place.listName,
+        notes: place.notes,
+        googleMapsUrl: place.url,
+        latitude: place.coordinates?.lat,
+        longitude: place.coordinates?.lng,
+        address: place.address,
+        metadata: {
+          source: place.metadata.source === 'takeout_json' ? 'json' : 'csv',
+          originalData: place.metadata.rawData,
+        },
+      }));
+
+      // Check if user has OpenAI API key in localStorage
+      const apiKey = localStorage.getItem('openai_api_key');
+      const provider = apiKey 
+        ? new OpenAIEmbeddingProvider({ apiKey })
+        : new MockEmbeddingProvider();
+
+      const searchEngine = new SearchEngine(provider);
+
+      // Build index with progress callback
+      await searchEngine.buildIndex(placeRecords, (progress) => {
+        setEmbeddingProgress(progress);
+      });
+
+      // Update config
+      await db.updateConfig({
+        totalEmbeddings: places.length,
+        modelLoaded: true,
+      });
+
+      setImportStatus({
+        type: 'success',
+        message: `Successfully imported ${places.length} places and generated embeddings!`,
+      });
+      setEmbeddingProgress(null);
+    } catch (error) {
+      console.error('Embedding generation error:', error);
+      const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+      const apiKey = localStorage.getItem('openai_api_key');
+      const hint = apiKey 
+        ? ' (Check your OpenAI API key and credits. Or clear the API key to use mock embeddings.)'
+        : ' (Using mock embeddings)';
+      
+      setImportStatus({
+        type: 'error',
+        message: `Import succeeded but embedding generation failed: ${errorMessage}${hint}`,
+      });
+      setEmbeddingProgress(null);
     }
   };
 
@@ -192,8 +274,13 @@ export default function FileImportPanel() {
         </p>
       </div>
 
+      {/* Embedding Progress */}
+      {embeddingProgress && (
+        <EmbeddingProgress progress={embeddingProgress} />
+      )}
+
       {/* Status Message */}
-      {importStatus && (
+      {importStatus && !embeddingProgress && (
         <div
           className={`
             p-3 rounded-md text-sm
@@ -205,6 +292,27 @@ export default function FileImportPanel() {
           {importStatus.message}
         </div>
       )}
+
+      {/* API Key Input */}
+      <div className="text-xs text-gray-600 space-y-2 pt-4 border-t border-gray-200">
+        <p className="font-medium">OpenAI API Key (optional):</p>
+        <input
+          type="password"
+          placeholder="sk-..."
+          defaultValue={localStorage.getItem('openai_api_key') || ''}
+          onChange={(e) => {
+            if (e.target.value) {
+              localStorage.setItem('openai_api_key', e.target.value);
+            } else {
+              localStorage.removeItem('openai_api_key');
+            }
+          }}
+          className="w-full px-3 py-2 text-xs border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+        <p className="text-gray-500">
+          Leave empty to use mock embeddings for testing. Add your OpenAI API key for real semantic search.
+        </p>
+      </div>
 
       {/* Instructions */}
       <div className="text-xs text-gray-600 space-y-2 pt-4 border-t border-gray-200">
